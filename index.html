@@ -1,0 +1,82 @@
+<!doctype html>
+<html> 
+ <head> 
+  <title>Ticket Manager</title> 
+  <style>
+    <style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  h1 {
+    margin-bottom: 20px;
+  }
+  
+  label, input {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    margin: 5px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  #statusDisplay {
+    margin-top: 20px;
+    font-weight: bold;
+  }
+</style>
+   
+ </head> 
+ <body> 
+  <h1>Ticket Manager</h1> <label for="ticketNumber">Enter Ticket Number:</label> 
+  <input type="text" id="ticketNumber"> <button onclick="checkStatus()">Check Status</button> <button onclick="markAsPaid()">Mark as Paid</button> <button onclick="markAsNotPaid()">Mark as Not Paid</button> 
+  <div id="statusDisplay"></div> 
+  <script>
+    function checkStatus() {
+  const ticketNumber = document.getElementById("ticketNumber").value;
+  const statusDisplay = document.getElementById("statusDisplay");
+
+  // Check if the ticket status is stored in local storage
+  const storedStatus = localStorage.getItem(`ticket-${ticketNumber}`);
+  if (storedStatus !== null) {
+    statusDisplay.textContent = `Ticket ${ticketNumber} is ${storedStatus}.`;
+  } else {
+    statusDisplay.textContent = `Ticket ${ticketNumber} status not found.`;
+  }
+}
+
+    
+   function markAsPaid() {
+  const ticketNumber = document.getElementById("ticketNumber").value;
+
+  // Store ticket status as "Paid" in local storage
+  localStorage.setItem(`ticket-${ticketNumber}`, "Paid");
+  
+  alert(`Ticket ${ticketNumber} marked as Paid.`);
+}
+
+function markAsNotPaid() {
+  const ticketNumber = document.getElementById("ticketNumber").value;
+
+  // Store ticket status as "Not Paid" in local storage
+  localStorage.setItem(`ticket-${ticketNumber}`, "Not Paid");
+  
+  alert(`Ticket ${ticketNumber} marked as Not Paid.`);
+}
+  </script> 
+ 
+</body></html>
